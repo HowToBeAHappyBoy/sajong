@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { worker } from './msw';
+import { Global } from '@emotion/react';
+import { globalStyle } from './styles';
 
 worker.start();
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
+    <Global styles={globalStyle} />
     <App />
   </React.StrictMode>
 );

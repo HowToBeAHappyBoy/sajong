@@ -8,8 +8,8 @@ import {
 } from './handler';
 
 export const WishItemHandler = [
-  rest.get('/wish-list/:userId', mockGetWishItems),
-  rest.post('/wish-list/:userId', mockAddWishItems),
-  rest.put('/wish-list/:userId/:wishItemId', mockUpdateWishItems),
-  rest.delete('/wish-list/:userId/:wishItemId', mockDeleteWishItems),
+  rest.get('http://apiapi.api/wish-list/:userId', mockGetWishItems),
+  rest.post('http://apiapi.api/wish-list/:userId', mockAddWishItems),
+  rest.put('http://apiapi.api/wish-list/:userId/:wishItemId', mockUpdateWishItems),
+  rest.delete('http://apiapi.api/wish-list/:userId/:wishItemId', mockDeleteWishItems),
 ];
