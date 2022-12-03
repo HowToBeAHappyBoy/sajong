@@ -20,6 +20,7 @@ import {
   ApiOperation,
   ApiParam,
   ApiResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -28,6 +29,7 @@ import { WishList } from '../../entitys/wish-list.entity';
 import { createImageURL, multerOptions } from '../../lib/multerOptions';
 import { CreateWishListReq, FindWishListRes } from './wish-list.dto';
 
+@ApiTags('WishList')
 @Controller('wish-list')
 export class WishListController {
   constructor(

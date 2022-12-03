@@ -1,9 +1,10 @@
 import { Controller, Param, Post } from '@nestjs/common';
-import { ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../../entitys/user.entity';
 
+@ApiTags('User')
 @Controller('users')
 export class UserController {
   constructor(
