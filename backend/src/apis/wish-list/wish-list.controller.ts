@@ -27,7 +27,11 @@ import { Repository } from 'typeorm';
 import { User } from '../../entities/user.entity';
 import { WishList } from '../../entities/wish-list.entity';
 import { createImageURL, multerOptions } from '../../lib/multerOptions';
-import { CreateWishListReq, FindWishListRes } from './wish-list.dto';
+import {
+  CreateWishListReq,
+  FindWishListDetailRes,
+  FindWishListRes,
+} from './wish-list.dto';
 
 @ApiTags('WishList')
 @Controller('wish-list')
@@ -70,6 +74,35 @@ export class WishListController {
         title: wishList.title,
         description: wishList.description,
       })),
+    };
+  }
+
+  @ApiOperation({ summary: 'wishlist 상세 가져옴' })
+  @ApiParam({ name: 'wishItemId', type: Number })
+  @ApiResponse({ type: FindWishListDetailRes, status: HttpStatus.OK })
+  @Get(':wishItemId/detail')
+  async getWishListDetail(
+    @Param('wishItemId', ParseIntPipe) wishItemId: number,
+  ): Promise<FindWishListDetailRes> {
+    const wishList = await this.wishListRepository.findOneOrFail({
+      where: {
+        id: wishItemId,
+      },
+    });
+
+    const user = await this.userRepository.findOneOrFail({
+      where: {
+        id: wishList.userId,
+      },
+    });
+    return {
+      id: wishList.id,
+      // http://10.10.4.181:4000/docs
+      image: `http://10.10.4.181:4000${wishList.imagePath}`,
+      link: wishList.link,
+      title: wishList.title,
+      description: wishList.description,
+      userId: user.kakaoId,
     };
   }
 

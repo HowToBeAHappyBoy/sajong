@@ -16,6 +16,10 @@ export class FindWishListDataRes {
   @ApiProperty({ type: String })
   description: string;
 }
+export class FindWishListDetailRes extends FindWishListDataRes {
+  @ApiProperty({ type: String })
+  userId: string;
+}
 
 export class FindWishListRes {
   @ApiProperty({ type: FindWishListDataRes, isArray: true })
