@@ -2,12 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { join } from 'path';
 import { AppModule } from './app.module';
-import { static as statc1 } from 'express';
+import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.use('/public', statc1(join(__dirname, '../public')));
+  app.use('/public', express.static(join(__dirname, '../public')));
 
   app.enableCors({ origin: '*' });
 
