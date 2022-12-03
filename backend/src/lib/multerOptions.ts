@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 export const multerOptions = {
   fileFilter: (request, file, callback) => {
     if (file.mimetype.match(/\/(jpg|jpeg|png|svg|gif)$/)) {
-      // 이미지 형식은 jpg, jpeg, png만 허용합니다.
       callback(null, true);
     } else {
       callback(
