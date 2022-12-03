@@ -4,4 +4,5 @@ export interface WishItem {
     image: string;
     link: string;
     description: string;
+    userId: string;
 }

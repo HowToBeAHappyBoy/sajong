@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../components/button";
 import { Layout } from "../../layouts/CommonLayout";
 import { useQuery } from "../../react-query";
@@ -9,6 +9,8 @@ import { WishItem } from "../../types/WishItem.type";
 
 export const WishItemPage = () => {
   const { id } = useParams() as { id?: string };
+  const userId = sessionStorage.getItem("id");
+  const nav = useNavigate();
 
   const { data } = useQuery(
     ["wish-item", id],
@@ -17,6 +19,15 @@ export const WishItemPage = () => {
       enabled: !!id,
     }
   );
+
+  const handleRemove = async () => {
+    await axios
+      .delete(`http://10.10.4.181:4000/wish-list/${userId}/${id}`)
+      .then(() => {
+        alert("삭제되었습니다");
+        nav(-1);
+      });
+  };
 
   if (!data?.data) {
     return null;
@@ -29,9 +40,23 @@ export const WishItemPage = () => {
         <Contents>
           <Title>{data.data.title}</Title>
           <Description>{data.data.description}</Description>
-          <ButtonWrapper>
-            <Button text="상품 보러가기" onClick={() => window.open(data.data.link)}/>
-          </ButtonWrapper>
+          {userId === data.data.userId ? (
+            <ButtonGroup>
+              <Button text="편집" onClick={() => window.open(data.data.link)} />
+              <Button
+                text="삭제"
+                onClick={() => handleRemove()}
+                gray
+              />
+            </ButtonGroup>
+          ) : (
+            <ButtonWrapper>
+              <Button
+                text="사주기"
+                onClick={() => window.open(data.data.link)}
+              />
+            </ButtonWrapper>
+          )}
         </Contents>
       </Container>
     </Layout>
@@ -71,9 +96,19 @@ const Description = styled.span`
 `;
 
 const ButtonWrapper = styled.div`
-padding: 20px;
+  padding: 20px;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
+`;
+
+const ButtonGroup = styled.div`
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 12px;
 `;
