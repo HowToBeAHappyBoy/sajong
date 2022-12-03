@@ -55,7 +55,7 @@ export class WishListController {
         userId: user.id,
       },
       order: {
-        id: 'DESC',
+        id: 'ASC',
       },
     });
 
