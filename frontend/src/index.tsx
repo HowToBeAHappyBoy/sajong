@@ -1,18 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { worker } from './msw';
 import { Global } from '@emotion/react';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { QueryClientProvider } from 'react-query';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { IndexPage } from './apps/index/IndexPage';
+import { WishItemPage } from './apps/wish-item/WishItemPage';
+import { WishListPage } from './apps/wish-list/WishListPage';
+import './index.css';
+import { worker } from './msw';
+import { createQueryClient } from './react-query';
+import reportWebVitals from './reportWebVitals';
 import { globalStyle } from './styles';
 
 worker.start();
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <IndexPage />,
+  },
+  {
+    path: "wish-list/:id/:name",
+    element: <WishListPage />,
+  },
+  {
+    path: "wish-item/:id",
+    element: <WishItemPage />
+  }
+]);
+
+const queryClientRef = createQueryClient();
+
+createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Global styles={globalStyle} />
-    <App />
+    <QueryClientProvider client={queryClientRef} contextSharing>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

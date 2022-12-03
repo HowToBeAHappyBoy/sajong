@@ -164,7 +164,7 @@ export const globalStyle = css`
     min-height: 100vh;
     background-color: #f6f7f8;
   }
-  #__next {
+  #root {
     width: 100%;
     height: 100%;
     min-height: 100vh;
