@@ -10,6 +10,6 @@ import {
 export const WishItemHandler = [
   rest.get('/wish-list/:userId', mockGetWishItems),
   rest.post('/wish-list/:userId', mockAddWishItems),
-  rest.put('/wish-list/:userId', mockUpdateWishItems),
-  rest.delete('/wish-list/:userId', mockDeleteWishItems),
+  rest.put('/wish-list/:userId/:wishItemId', mockUpdateWishItems),
+  rest.delete('/wish-list/:userId/:wishItemId', mockDeleteWishItems),
 ];
