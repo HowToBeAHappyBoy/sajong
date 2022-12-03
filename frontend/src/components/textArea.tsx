@@ -11,11 +11,11 @@ interface Props {
   label: string;
 }
 
-export const Input = ({ id, name, placeholder, onChange, onBlur, value, label }: Props) => {
+export const TextArea = ({ id, name, placeholder, onChange, onBlur, value, label }: Props) => {
   return (
     <Container>
       <Label>{label}</Label>
-      <StyledInput
+      <StyledTextArea
         id={id}
         name={name}
         value={value}
@@ -41,7 +41,7 @@ const Label = styled.span`
   display: block;
 `;
 
-const StyledInput = styled.input`
+const StyledTextArea = styled.textarea`
   width: 100%;
   border-radius: 4px;
   border: 1px solid ${Colors.line};
@@ -50,6 +50,7 @@ const StyledInput = styled.input`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  height: 200px;
   letter-spacing: 0.5px;
   color: #000000;
 
