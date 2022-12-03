@@ -39,7 +39,7 @@ export class WishListController {
 
   @ApiOperation({ summary: 'wishlist 가져옴' })
   @ApiParam({ name: 'userId', type: String })
-  @ApiResponse({ type: FindWishListRes })
+  @ApiResponse({ type: FindWishListRes, status: HttpStatus.OK })
   @Get('/:userId')
   async getWishList(
     @Param('userId') kakaoId: string,
@@ -62,7 +62,8 @@ export class WishListController {
     return {
       data: wishLists.map((wishList) => ({
         id: wishList.id,
-        image: `http://localhost:4000${wishList.imagePath}`,
+        // http://10.10.4.181:4000/docs
+        image: `http://10.10.4.181:4000${wishList.imagePath}`,
         link: wishList.link,
         title: wishList.title,
         description: wishList.description,
@@ -79,7 +80,7 @@ export class WishListController {
   @HttpCode(HttpStatus.CREATED)
   async createWishList(
     @Param('userId') kakaoId: string,
-    @Body() { link, title, description }: CreateWishListReq,
+    @Body() { link, title, description }: Omit<CreateWishListReq, 'file'>,
     @UploadedFile() file: Express.Multer.File,
   ) {
     const user = await this.userRepository.findOne({
@@ -110,7 +111,7 @@ export class WishListController {
   async modifyWishList(
     @Param('userId') kakaoId: string,
     @Param('wishItemId', ParseIntPipe) wishItemId: number,
-    @Body() { link, title, description }: CreateWishListReq,
+    @Body() { link, title, description }: Omit<CreateWishListReq, 'file'>,
     @UploadedFile() file: Express.Multer.File,
   ) {
     const user = await this.userRepository.findOne({
