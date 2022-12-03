@@ -18,6 +18,7 @@ export class FindWishListDataRes {
 }
 
 export class FindWishListRes {
+  @ApiProperty({ type: FindWishListDataRes, isArray: true })
   data: FindWishListDataRes[];
 }
 
