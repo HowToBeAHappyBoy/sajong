@@ -3,34 +3,39 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClientProvider } from 'react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { CreatePage } from './apps/create';
 import { IndexPage } from './apps/index/IndexPage';
 import { WishItemPage } from './apps/wish-item/WishItemPage';
 import { WishListPage } from './apps/wish-list/WishListPage';
 import './index.css';
-import { worker } from './msw';
+// import { worker } from './msw';
 import { createQueryClient } from './react-query';
 import reportWebVitals from './reportWebVitals';
 import { globalStyle } from './styles';
 
-worker.start();
+// worker.start();
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <IndexPage />,
   },
   {
-    path: "wish-list/:id/:name",
+    path: 'wish-list/:id/:name',
     element: <WishListPage />,
   },
   {
-    path: "wish-item/:id",
-    element: <WishItemPage />
-  }
+    path: 'wish-item/:id',
+    element: <WishItemPage />,
+  },
+  {
+    path: '/create',
+    element: <CreatePage />,
+  },
 ]);
 
 const queryClientRef = createQueryClient();
 
-createRoot(document.getElementById("root") as HTMLElement).render(
+createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Global styles={globalStyle} />
     <QueryClientProvider client={queryClientRef} contextSharing>
