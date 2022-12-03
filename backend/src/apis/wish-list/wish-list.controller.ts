@@ -24,8 +24,8 @@ import {
 } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../../entitys/user.entity';
-import { WishList } from '../../entitys/wish-list.entity';
+import { User } from '../../entities/user.entity';
+import { WishList } from '../../entities/wish-list.entity';
 import { createImageURL, multerOptions } from '../../lib/multerOptions';
 import { CreateWishListReq, FindWishListRes } from './wish-list.dto';
 

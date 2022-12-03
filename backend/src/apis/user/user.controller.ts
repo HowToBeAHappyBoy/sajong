@@ -2,7 +2,7 @@ import { Controller, Param, Post } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../../entitys/user.entity';
+import { User } from '../../entities/user.entity';
 
 @ApiTags('User')
 @Controller('users')
