@@ -155,7 +155,7 @@ export class WishListController {
       },
     });
 
-    const wishList = await await this.wishListRepository.findOne({
+    const wishList = await this.wishListRepository.findOne({
       where: {
         userId: user.id,
         id: wishItemId,
