@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    container_name: sajong-db
+    environment:
+        - MYSQL_DATABASE=sajong
+        - MYSQL_ROOT_PASSWORD=sajong12
+        - TZ=Asia/Seoul
+    command:
+        - --character-set-server=utf8mb4
+        - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
