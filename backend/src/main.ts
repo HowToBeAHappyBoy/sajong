@@ -9,6 +9,8 @@ async function bootstrap() {
 
   app.use('/public', statc1(join(__dirname, '../public')));
 
+  app.enableCors({ origin: '*' });
+
   const config = new DocumentBuilder()
     .setTitle('sajong')
     .setDescription('sajong API description')
